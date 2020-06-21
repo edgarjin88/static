@@ -1,209 +1,148 @@
-import Head from 'next/head'
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import SimpleCard from "../components/ui/SimpleCard";
+import Typed from "react-typed";
+const roles = [
+  "React.js",
+  "WebRTC",
+  "Next.js",
+  "WebSocket",
+  "Dragon_Age 🗡️",
+  "Material-UI",
+  "Node.js",
+  "Exprss.js",
+  `DOOM2 🧡`,
+  "SQL",
+  "NoSQL",
+  "Ghost_in_the_Shell 🎞️",
+];
 
-export default function Home() {
+const backgroundImgURL = [
+  "url('/background/cross.jpg')",
+
+  "url('/background/board.jpg')",
+  ,
+  "url('/background/cuba.jpg')",
+  "url('/background/flower.jpg')",
+  "url('/background/leaf.jpg')",
+  "url('/background/wind.jpg')",
+  "url('/background/wood.jpg')",
+];
+
+const useStyles = makeStyles((theme) => ({
+  main: {
+    // backgroundColor: "red",
+    height: "65vh",
+    display: "flex",
+    margin: 0,
+    textAlign: "center",
+  },
+  backImg: {
+    backgroundImage: "url('/background/board.jpg')",
+    backgroundSize: "cover",
+    background: "no-repeat",
+    width: "50%",
+    // height: "100%",
+    borderRight: "2px black solid",
+    backgroundPosition: "50% 50%",
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+  },
+  description: {
+    width: "50%",
+    // height: "",
+    color: "grey",
+    backgroundColor: "white",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      height: "65vh",
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+      height: "100vh",
+    },
+  },
+  firstText: {
+    marginTop: "3em",
+    backgroundColor: "black",
+    color: "orange",
+    fontSize: "4rem",
+    transition: "all 2s",
+    "&:hover": {
+      color: "red",
+    },
+    marginBottom: 0,
+  },
+  secondText: {
+    marginTop: "3em",
+    backgroundColor: "black",
+    color: "white",
+    fontSize: "4rem",
+    transition: "all 2s",
+    "&:hover": {
+      color: "grey",
+    },
+    marginBottom: 0,
+  },
+  jobTitle: {
+    fontSize: "1.8rem",
+    backgroundColor: "black",
+    transition: "all 0.2s",
+    color: "#eeeeee",
+  },
+}));
+
+const Index = () => {
+  const classes = useStyles();
+  const [descriptionStyle, setDescriptionStyle] = useState(classes.firstText);
+  const [title, setTitle] = useState(classes.jobTitle);
+  const [transition, setTransition] = useState(false);
+  useEffect(() => {
+    console.log("fired");
+    let styleChange = setInterval(() => {
+      if (transition) {
+        setDescriptionStyle(classes.firstText);
+        setTransition(!transition);
+      } else {
+        setDescriptionStyle(classes.secondText);
+        setTransition(!transition);
+      }
+    }, 2000);
+    return () => {
+      clearInterval(styleChange);
+    };
+  }, [transition]);
+
   return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className={`${classes.main}`}>
+      {/* <h1>PLAY</h1> */}
+      <div className={classes.backImg}></div>
+      <div className={`${classes.description} pattern-dots-md`}>
+        <h1
+          className={`pattern-horizontal-lines-sm
+	 text-pattern ${descriptionStyle}`}
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-      </footer>
-
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
+          Test
+        </h1>
+        <h3 className={` ${classes.jobTitle}`}>FULL STACK DEVELOPER</h3>
+        <h2 style={{ color: "black" }}>
+          <Typed
+            loop
+            typeSpeed={50}
+            backSpeed={20}
+            strings={roles}
+            backDelay={3000}
+            loopCount={0}
+            showCursor
+            className="self-typed"
+            cursorChar="|"
+          />
+        </h2>
+        {/* <SimpleCard /> */}
+      </div>
     </div>
-  )
-}
+  );
+};
+
+export default Index;
