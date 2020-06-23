@@ -4,6 +4,8 @@ const arcBlue = "#0B72B9";
 const arcOrange = "#FFBA60";
 const arcGrey = "#868686";
 
+const black = "#000000";
+
 export default createMuiTheme({
   palette: {
     common: {
@@ -14,7 +16,7 @@ export default createMuiTheme({
       main: arcBlue,
     },
     secondary: {
-      main: arcOrange,
+      main: black,
     },
   },
   typography: {
@@ -26,10 +28,16 @@ export default createMuiTheme({
       fontSize: "1rem",
     },
     h1: {
-      fontFamily: "Raleway",
-      fontWeight: 700,
+      // fontFamily: "Raleway",
+      fontWeight: 400,
       fontSize: "2.5rem",
-      color: arcBlue,
+      // color: arcGrey,
+      lineHeight: 2,
+    },
+    h2: {
+      // fontFamily: "Raleway",
+      fontSize: "1.4rem",
+      color: arcGrey,
       lineHeight: 1.5,
     },
 
@@ -78,7 +86,7 @@ export default createMuiTheme({
   overrides: {
     MuiInputLabel: {
       root: {
-        color: arcBlue,
+        color: arcGrey,
         fontSize: "1rem",
       },
     },
@@ -89,10 +97,10 @@ export default createMuiTheme({
       },
       underline: {
         "&:before": {
-          borderBottom: `2px solid ${arcBlue}`,
+          borderBottom: `2px solid ${arcGrey}`,
         },
         "&:hover:not($disabled):not($focused):not($error):before": {
-          borderBottom: `2px solid ${arcBlue}`,
+          borderBottom: `2px solid ${arcGrey}`,
         },
       },
     },

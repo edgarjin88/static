@@ -1,5 +1,6 @@
 import React from "react";
-import Link from "../Link";
+import { useRouter } from "next/router";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
@@ -21,6 +22,15 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     // height: "20vh",
   },
+  project: {
+    display: "flex",
+    color: "black",
+    fontFamily: "Arial",
+    fontSize: "0.75rem",
+    fontWeight: "bold",
+    textDecoration: "none",
+    alignItems: "center",
+  },
   link: {
     display: "flex",
     color: "black",
@@ -29,6 +39,19 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     textDecoration: "none",
     alignItems: "center",
+
+    transition: "all 0.2s",
+    "&:hover": {
+      backgroundColor: "black",
+      color: "white",
+      boxShadow: " 0 1rem 2rem rgba(0, 0, 0, 0.15)",
+      transform: "translateY(-2px)",
+      cursor: "pointer",
+    },
+    "&:active": {
+      boxshadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.15)",
+      transform: "translateY(2px)",
+    },
   },
   gridItem: {
     margin: "0 4em",
@@ -59,17 +82,24 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   copyLeft: {
-    margin: "2em 0",
-    [theme.breakpoints.down("sm")]: {
+    marginBottom: "4rem",
+
+    [theme.breakpoints.down("xs")]: {
       margin: 0,
-      marginTop: "2rem",
-      marginBottom: "1em",
+      marginTop: "5rem",
+      marginBottom: "5rem",
     },
   },
 }));
 
 export default function Footer(props) {
+  const Router = useRouter();
+
   const classes = useStyles();
+
+  const handleLinkClick = (arg) => {
+    Router.push(arg).then(() => window.scrollTo(0, 0));
+  };
 
   return (
     <footer className={classes.footer}>
@@ -85,7 +115,7 @@ export default function Footer(props) {
               >
                 <Grid
                   item
-                  onClick={() => props.setValue(0)}
+                  onClick={(e) => handleLinkClick("/")}
                   className={classes.link}
                 >
                   <HomeIcon /> Home
@@ -99,53 +129,38 @@ export default function Footer(props) {
                 spacing={2}
                 style={{ margin: 0 }}
               >
-                <Grid
-                  item
-                  onClick={() => {
-                    props.setValue(1);
-                    props.setSelectedIndex(0);
-                  }}
-                  className={classes.link}
-                >
+                <Grid item className={classes.project}>
                   <AccountTreeIcon />
                   Projects
                 </Grid>
                 <Grid
                   item
                   className={classes.link}
-                  onClick={() => {
-                    props.setValue(1);
-                    props.setSelectedIndex(1);
-                  }}
-                >
-                  - Sumontee
-                </Grid>
-                <Grid
-                  item
-                  // href="/lemonstreaming"
-                  className={classes.link}
+                  onClick={(e) => handleLinkClick("/lemonstreaming")}
                 >
                   - Lemonstreaming
                 </Grid>
                 <Grid
                   item
-                  onClick={() => {
-                    props.setValue(1);
-                    props.setSelectedIndex(3);
-                  }}
                   className={classes.link}
+                  onClick={(e) => handleLinkClick("/sumontee")}
                 >
-                  - Launinark
+                  - Sumontee
                 </Grid>
+
                 <Grid
                   item
-                  onClick={() => {
-                    props.setValue(1);
-                    props.setSelectedIndex(3);
-                  }}
+                  onClick={(e) => handleLinkClick("/portfolio")}
                   className={classes.link}
                 >
                   - Portfolio Website
+                </Grid>
+                <Grid
+                  item
+                  onClick={(e) => handleLinkClick("/launinark")}
+                  className={classes.link}
+                >
+                  - Launinark
                 </Grid>
               </Grid>
             </Grid>
@@ -158,18 +173,16 @@ export default function Footer(props) {
               >
                 <Grid
                   item
-                  href="/revolution"
                   className={classes.link}
-                  onClick={() => props.setValue(2)}
+                  onClick={(e) => handleLinkClick("/skills")}
                 >
                   <AppsIcon />
                   Skills
                 </Grid>
                 <Grid
-                  item
-                  href="/revolution"
                   className={classes.link}
-                  onClick={() => props.setValue(2)}
+                  item
+                  onClick={(e) => handleLinkClick("/about")}
                 >
                   <EmojiPeopleIcon />
                   About Me
@@ -184,10 +197,9 @@ export default function Footer(props) {
                 style={{ margin: 0 }}
               >
                 <Grid
-                  item
-                  onClick={() => props.setValue(3)}
-                  href="/about"
                   className={classes.link}
+                  item
+                  onClick={(e) => handleLinkClick("/contact")}
                 >
                   <MailIcon />
                   Contact Me

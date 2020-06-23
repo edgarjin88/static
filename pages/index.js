@@ -66,7 +66,8 @@ const useStyles = makeStyles((theme) => ({
   firstText: {
     marginTop: "3em",
     backgroundColor: "black",
-    color: "orange",
+    fontWeight: 200,
+    color: "black",
     fontSize: "4rem",
     transition: "all 2s",
     "&:hover": {
@@ -76,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
   secondText: {
     marginTop: "3em",
+    fontWeight: 200,
     backgroundColor: "black",
     color: "white",
     fontSize: "4rem",
@@ -87,9 +89,8 @@ const useStyles = makeStyles((theme) => ({
   },
   jobTitle: {
     fontSize: "1.8rem",
-    backgroundColor: "black",
     transition: "all 0.2s",
-    color: "#eeeeee",
+    color: "black",
   },
 }));
 
@@ -123,7 +124,7 @@ const Index = () => {
           className={`pattern-horizontal-lines-sm
 	 text-pattern ${descriptionStyle}`}
         >
-          Test
+          YONGDUCK JIN
         </h1>
         <h3 className={` ${classes.jobTitle}`}>FULL STACK DEVELOPER</h3>
         <h2 style={{ color: "black" }}>
@@ -132,7 +133,7 @@ const Index = () => {
             typeSpeed={50}
             backSpeed={20}
             strings={roles}
-            backDelay={3000}
+            backDelay={1500}
             loopCount={0}
             showCursor
             className="self-typed"

@@ -118,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
     // fontSize: "2rem",
     // fontWeight: "bold",
     backgroundColor: "white",
-    borderBottom: "2px solid black",
+    borderBottom: "1px solid black",
     margin: 0,
     opacity: 1,
     borderRadius: 0,
@@ -164,6 +164,7 @@ export default function HideAppBar(props) {
 
   // for poper
   const handleClick = (event) => {
+    console.log("set encor :", event.currentTarget);
     setAnchorEl(event.currentTarget);
   };
 
@@ -212,11 +213,13 @@ export default function HideAppBar(props) {
   );
 
   const handleTabClick = (e, arg) => {
-    console.log("tab clicked :", arg);
-    if (arg === "/projects") {
-      handleClick(e);
-    }
-    Router.push(arg);
+    handleClose();
+    Router.push(arg).then(() => window.scrollTo(0, 0));
+  };
+
+  const handleHover = (e) => {
+    handleClick(e);
+    handleChange(e, 1);
   };
 
   // 아이콘 숫자 차이 때문이ㅣㄴ듯 아이콘을 더 넣어 보자.
@@ -244,7 +247,8 @@ export default function HideAppBar(props) {
               />
               <Tab
                 icon={<AccountTreeIcon />}
-                onClick={(e) => handleTabClick(e, "/projects")}
+                // onClick={(e) => handleTabClick(e, "/projects")}
+                onClick={handleHover}
                 // onMouseLeave={handleClose}
                 label="PROJECT"
               />
