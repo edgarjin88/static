@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Head from "next/head";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { mergeClasses } from "@material-ui/styles";
@@ -16,7 +17,6 @@ import ExpressIcon from "../public/skills/expressjs.svg";
 import ElectronIcon from "../public/skills/electron.svg";
 import AntdIcon from "../public/skills/ant-design.svg";
 import DockerIcon from "../public/skills/docker.svg";
-// import NodeIcon from "../public/skills/icons8-nodejs.svg";
 import MongoDBIcon from "../public/skills/mongodb.svg";
 import GitIcon from "../public/skills/git.svg";
 import JSIcon from "../public/skills/javascript_color.svg";
@@ -28,7 +28,6 @@ import WebRTCIcon from "../public/skills/webrtc_b.svg";
 import StyledIcon from "../public/skills/styled-components.svg";
 import SocketIcon from "../public/skills/socket-dot-io.svg";
 import PythonIcon from "../public/skills/python_color2.svg";
-import SequelizeIcon from "../public/skills/sequelize.svg";
 import SalesforceIcon from "../public/skills/salesforce.svg";
 import JestIcon from "../public/skills/jest.svg";
 import OauthIcon from "../public/skills/oauth.svg";
@@ -40,12 +39,7 @@ import JqueryIcon from "../public/skills/jquery.svg";
 import MySQLIcon from "../public/skills/mysql.svg";
 import MaterialIcon from "../public/skills/material-ui.svg";
 import BootstrapIcon from "../public/skills/bootstrap.svg";
-// import JqueryIcon from "../public/skills/Python_color.svg";
-// import JqueryIcon from "../public/skills/jquery.svg";
-// import PythonColorIcon from "../public/skills/";
 import RailsIcon from "../public/skills/Rails.svg";
-// import SleepingIcon from "../public/skills/visualstudiocode.svg";
-// import SleepingIcon from "../public/skills/";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -57,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     margin: "auto",
 
-    marginTop: "1rem",
+    marginTop: "0.8rem",
     textAlign: "center",
     [theme.breakpoints.down("md")]: {
       width: "80%",
@@ -90,14 +84,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     [theme.breakpoints.down("md")]: {
       width: "100%",
-      // padding: 0,
     },
-    [theme.breakpoints.down("xs")]: {
-      // padding: 0,
-    },
+    [theme.breakpoints.down("xs")]: {},
   },
   gridItem: {
-    // backgroundColor: "red",
     position: "relative",
     width: "6.5rem",
     height: "6.5rem",
@@ -117,8 +107,6 @@ const useStyles = makeStyles((theme) => ({
   caption: {
     height: "100%",
     width: "100%",
-    color: "black",
-
     top: 0,
     left: 0,
     display: "flex",
@@ -129,8 +117,8 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "uppercase",
     fontSize: "0.9rem",
     opacity: 0,
-    transition: "all .5s",
-    backfaceVisibility: "hidden",
+    backgroundColor: "white",
+    transition: "all .3s",
     "&:hover": {
       backgroundColor: "black",
       color: "white",
@@ -209,6 +197,34 @@ const Skills = () => {
 
   return (
     <Paper className={classes.main}>
+      <Head>
+        <title key="title">Yongduckjin.com | Skills | Yongduck Jin</title>
+        <meta
+          name="description"
+          key={"description"}
+          content={`Yongduckjin.com | Skills | Some of my favorite skills that I love to use to create web applications`}
+        />
+        <meta
+          property="og:title"
+          content={`Yongduckjin.com | Skills | Yongduck Jin`}
+        />
+
+        <meta
+          key={"og:description"}
+          property="og:description"
+          content={`Yongduck.jin.com | Skills | Some of my favorite skills that I love to use to create web applications`}
+        />
+        <meta
+          key={"og:url"}
+          property="og:url"
+          content={`yongduckjin.com/skills`}
+        />
+        <link
+          key={"canonical"}
+          rel="canonical"
+          href={`yongduckjin.com/skills`}
+        />
+      </Head>
       <Grid container justify="center" className={classes.mainContainer}>
         <Grid container className={classes.secondContainer} item>
           {IconList.map((el, i) => {
@@ -226,41 +242,3 @@ const Skills = () => {
 };
 
 export default Skills;
-
-// const Skills = () => {
-//   const classes = useStyles();
-//   const IconList = [
-//     {name: , component: },     {name: , component: },     {name: , component: },     {name: , component: },     {name: , component: },     {name: , component: },     {name: , component: },     {name: , component: },
-//     <FirebaseIcon className={classes.svgSize} />
-//     <NextIcon className={classes.svgSize} />,
-//     <ReactBlackIcon className={classes.svgSize} />,
-//     <ReduxIcon className={classes.svgSize} />,
-//     <AWSIcon className={classes.svgSize} />,
-//     <DockerIcon className={classes.svgSize} />,
-//     <MongoDBIcon className={classes.svgSize} />,
-//     <GitIcon className={classes.svgSize} />,
-//     <JSIcon className={classes.svgSize} />,
-//     <HerokuIcon className={classes.svgSize} />,
-//     <NPMIcon className={classes.svgSize} />,
-//     <NodeDotIcon className={classes.svgSize} />,
-//     <TSIcon className={classes.svgSize} />,
-//     <WebRTCIcon className={classes.svgSize} />,
-//     <StyledIcon className={classes.svgSize} />,
-//     <SocketIcon className={classes.svgSize} />,
-//     <PythonIcon className={classes.svgSize} />,
-//     <VSCodeIcon className={classes.svgSize} />,
-//     <RailsIcon className={classes.svgSize} />,
-//     <MySQLIcon className={classes.svgSize} />,
-//     <MaterialIcon className={classes.svgSize} />,
-//     <JqueryIcon className={classes.svgSize} />,
-//     <SalesforceIcon className={classes.svgSize} />,
-//     <RubyIcon className={classes.svgSize} />,
-//     <BootstrapIcon className={classes.svgSize} />,
-//     <AntdIcon className={classes.svgSize} />,
-//     <ElectronIcon className={classes.svgSize} />,
-//     <ExpressIcon className={classes.svgSize} />,
-//     <JestIcon className={classes.svgSize} />,
-//     <OauthIcon className={classes.svgSize} />,
-//     <VueIcon className={classes.svgSize} />,
-//     <SleepingIcon className={classes.svgSize} />,
-//   ];

@@ -1,40 +1,56 @@
-import React, { useState, useEffect } from "react";
-
 import { makeStyles } from "@material-ui/core/styles";
-import { mergeClasses } from "@material-ui/styles";
+import Head from "next/head";
+
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import Stepper from "../components/ui/Stepper";
 import Divider from "@material-ui/core/Divider";
 import { Typography } from "@material-ui/core";
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListSubheader from "@material-ui/core/ListSubheader";
+import LanguageIcon from "@material-ui/icons/Language";
+
 import BallotIcon from "@material-ui/icons/Ballot";
-import SettingsIcon from "@material-ui/icons/Settings";
 import ColorLensIcon from "@material-ui/icons/ColorLens";
 const useStyles = makeStyles((theme) => ({
   main: {
     width: "100%",
-    marginTop: "1rem",
+
+    // backgroundColor: "grey",
+    marginTop: "3rem",
     height: "100%",
     alignItems: "center",
     flexDirection: "column",
     textAlign: "center",
   },
   gridContainer: {
-    width: "80%",
-    justifyContent: "center",
+    // backgroundColor: "red",
+    width: "70%",
+    justifyContent: "space-evenly",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+      height: "100%",
+      marginBottom: "1.5rem",
+    },
   },
   textArea: {
     width: "45%",
+    margin: "0.5rem",
     // flexWrap: "wrap",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    [theme.breakpoints.down("md")]: {
+      width: "45%",
+      // height: "50%",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "75%",
+      // height: "50%",
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+      // height: "50%",
+    },
   },
   listContainer: {
     flexDirection: "row",
@@ -44,84 +60,163 @@ const useStyles = makeStyles((theme) => ({
   contentsArea: {
     width: "45%",
     padding: "0.5rem",
+    justifyContent: "center",
+    [theme.breakpoints.down("md")]: {
+      width: "45%",
+      // height: "50%",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "75%",
+      // height: "50%",
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+      // height: "50%",
+    },
   },
   hrStyle: {
     color: "red",
     width: "60%",
     height: "2px",
+    margin: "2rem 0",
+  },
+  linkContainer: {
+    display: "flex",
+    alignItems: "center",
+  },
+  link: {
+    display: "flex",
+    alignItems: "center",
+    margin: "1rem",
+    color: "#868686",
+    padding: "0.3rem",
+
+    // cursor: "pointer",
+    fontWeight: "bold",
+    textDecoration: "none",
+    transition: "all 0.2s",
+    "&:hover": {
+      backgroundColor: "#868686",
+
+      color: "white",
+      boxShadow: " 0 1rem 2rem rgba(0, 0, 0, 0.15)",
+      transform: "translateY(-2px)",
+      cursor: "pointer",
+    },
+    "&:active": {
+      boxshadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.15)",
+      transform: "translateY(2px)",
+    },
   },
 }));
+const features = [
+  {
+    label: "Landing Page",
+    imgPath:
+      "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
+  },
+  {
+    label: "Landing Page2",
+    imgPath:
+      "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
+  },
+];
+
+const design = [
+  {
+    label: "Responsive grid layout",
+    imgPath:
+      "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
+  },
+  {
+    label: "Custom animation",
+    imgPath:
+      "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
+  },
+  {
+    label: "Long-scrolling website design",
+    imgPath:
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80",
+  },
+];
 
 const Portfolio = () => {
   const classes = useStyles();
 
   return (
     <Grid container className={classes.main}>
-      <h1> Launinark.com</h1>
+      <title key="title">Launinark.com | Yongduck Jin</title>
+      <meta
+        name="description"
+        key={"description"}
+        content={`Launinark.com | Static website for the company Launinark `}
+      />
+      <meta
+        property="og:title"
+        content={`Launinark.com | Static website for the company Launinark`}
+      />
+
+      <meta
+        key={"og:description"}
+        property="og:description"
+        content={`Launinark | Static website for the company Launinark`}
+      />
+      <meta
+        key={"og:url"}
+        property="og:url"
+        content={`yongduckjin.com/launinark`}
+      />
+      <link
+        key={"canonical"}
+        rel="canonical"
+        href={`yongduckjin.com/launinark`}
+      />
+      <h1>Launinark.com</h1>
       <Grid container item className={classes.gridContainer}>
         <Grid item className={classes.textArea}>
           {" "}
           <Typography variant="h2">
             {" "}
-            - <BallotIcon /> Features -
+            -&nbsp; <BallotIcon />
+            &nbsp; Features -
           </Typography>
           <p>
-            It is my responsive portfolio website. Not just a usual static web
-            application, but a <strong>BlAZING FAST</strong> single page
-            application. The whole web pages are server side rendered to provide
-            the best user experience and Search Engine Optimization.
+            A static webpage designed for a company Launinark. Used plain
+            javascript, jQuery, HTML and CSS for DOM manipulation and animation.
+            Deployed on AWS.
           </p>
+          <div className={classes.linkContainer}>
+            <div className={classes.link}>
+              <LanguageIcon />
+              <a>&nbsp; &nbsp; Demo</a>
+            </div>
+          </div>
         </Grid>
-        <Grid item className={classes.contentsArea}>
+        <Grid container item className={classes.contentsArea}>
           {" "}
-          <Stepper />
+          <Stepper key="features" stepContents={features} />
         </Grid>
       </Grid>
       <Divider className={classes.hrStyle} />
+
       <Grid container item className={classes.gridContainer}>
         <Grid item className={classes.textArea}>
           {" "}
           <Typography variant="h2">
-            - <SettingsIcon /> Stack -
+            {" "}
+            -&nbsp;
+            <ColorLensIcon />
+            &nbsp; Design -
           </Typography>
           <p>
-            I used Next.js to integrate server side rendering which provide the
-            best user experience as well as SEO. As this web site already
-            contains basic featurs as a SPA, it would be easily sacled up to
-            other project such as tech blogs with CRUD functions. Deployed on
-            AWS.
-          </p>
-          <strong>
-            React.js/Next.js, Material UI, AWS, S3, NodeMail, Axios, Real Time
-            Message, CloudFront
-          </strong>
-        </Grid>
-        <Grid item className={classes.contentsArea}>
-          {" "}
-          <Stepper />
-        </Grid>
-      </Grid>
-      <Divider className={classes.hrStyle} />
-      <Grid container item className={classes.gridContainer}>
-        <Grid item className={classes.textArea}>
-          {" "}
-          <Typography variant="h2">
-            - <ColorLensIcon />
-            Design -
-          </Typography>
-          <p>
-            <strong>Material UI</strong> is used as it provides a number of
-            React firendly featurs. It can be fully server side rendered even in
-            full stack dynamic web application. Also, general functionalities
-            provided by <strong>Styleld-Components</strong> already exist in{" "}
-            <strong>Material UI</strong>. I intended to use simple and basic
-            design patterns, minimising special CSS effects, but at the same
-            time creating my originality.
+            It is a mobile friendly website that can fit in any size of screens.
+            This website is similar to usual long-scrolling websites. For
+            animations and visual effects, only CSS and jQuery were used.
           </p>
         </Grid>
-        <Grid item className={classes.contentsArea}>
+        <Grid container item className={classes.contentsArea}>
           {" "}
-          <Stepper />
+          <Stepper key="design" stepContents={design} />
         </Grid>
       </Grid>
     </Grid>

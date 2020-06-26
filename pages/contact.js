@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Head from "next/head";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { mergeClasses } from "@material-ui/styles";
@@ -8,6 +9,9 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import EmailIcon from "@material-ui/icons/Email";
 import SendIcon from "@material-ui/icons/Send";
+import axios from "axios";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Snackbar from "@material-ui/core/Snackbar";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -15,13 +19,13 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     width: "75%",
     display: "flex",
-    // border: "black solid 1px",
     flexDirection: "row",
     fontSize: "1.2rem",
 
     margin: "auto",
+    marginTop: "0.8rem",
     justifyContent: "center",
-    marginTop: "1.2rem",
+
     textAlign: "center",
     [theme.breakpoints.down("lg")]: {
       width: "90%",
@@ -37,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     width: "50%",
-    height: "100%",
+
     alignItems: "center",
     [theme.breakpoints.down("sm")]: {
       justifyContent: "center",
@@ -122,6 +126,101 @@ const useStyles = makeStyles((theme) => ({
 
 const Contact = () => {
   const classes = useStyles();
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+
+  const [nameHelper, setNameHelper] = useState("");
+  const [emailHelper, setEmailHelper] = useState("");
+  const [messageHelper, setMessageHelper] = useState("");
+
+  const onChange = (event) => {
+    let valid;
+    switch (event.target.id) {
+      case "email":
+        setEmail(event.target.value);
+        valid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
+          event.target.value
+        );
+        if (!valid) {
+          setEmailHelper("Invalid email");
+        } else {
+          setEmailHelper("");
+        }
+
+        break;
+
+      case "name":
+        setName(event.target.value);
+        if (name.length < 2) {
+          setNameHelper("Please enter your full name");
+        } else {
+          setNameHelper("");
+        }
+        break;
+      case "message":
+        setMessage(event.target.value);
+        if (message.length < 2) {
+          setMessageHelper("Please enter message");
+        } else {
+          setMessageHelper("");
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    backgroundColor: "",
+  });
+  const onConfirm = (e) => {
+    if (
+      name.length !== 0 &&
+      message.length !== 0 &&
+      email.length !== 0 &&
+      emailHelper.length === 0 &&
+      nameHelper.length === 0 &&
+      messageHelper.length === 0
+    ) {
+      setLoading(true);
+      axios
+        .get(
+          `https://us-central1-portfolio-b1a7f.cloudfunctions.net/sendMail
+`,
+          { params: { name, email, message } }
+        )
+        .then((res) => {
+          setLoading(false);
+          setEmail("");
+          setMessage("");
+          setName("");
+          setAlert({
+            open: true,
+            message:
+              "Your message sent successfully. I will reply within 24 hours",
+            backgroundColor: "#4BB543",
+          });
+        })
+        .catch((e) => {
+          setLoading(false);
+          setAlert({
+            open: true,
+            message: "Something went wrong, please try again!",
+            backgroundColor: "#FF3232",
+          });
+        });
+    } else {
+      setAlert({
+        open: true,
+        message: "Please fill the form before you send a message!",
+        backgroundColor: "#FF3232",
+      });
+    }
+  };
 
   return (
     <Grid container className={classes.main}>
@@ -148,39 +247,56 @@ const Contact = () => {
         <form className={classes.form} noValidate autoComplete="off">
           <TextField
             id="email"
-            error={false}
             label="Email"
+            value={email}
+            onChange={onChange}
+            error={emailHelper.length > 0}
             color="secondary"
             helperText="Incorrect email address"
           />
           <TextField
             id="name"
-            error={false}
+            error={nameHelper.length > 1}
+            value={name}
+            onChange={onChange}
             color="secondary"
             label="Full Name"
-            helperText="Please enter your name"
+            helperText={nameHelper}
           />
 
           <TextField
+            value={message}
+            // onChange={(e) => setMessage(e.target.value)}
+            onChange={onChange}
             id="message"
             label="Message"
-            error={false}
+            error={messageHelper.length > 1}
             color="secondary"
             multiline
             rows="4"
-            helperText="Please enter message before you send a mail"
+            helperText={messageHelper}
             // defaultValue="Message"
           />
           <Button
+            onClick={onConfirm}
             className={classes.button}
             variant="contained"
             color="secondary"
             startIcon={<SendIcon />}
           >
-            Send
+            {loading ? <CircularProgress size={30} /> : "Send"}
           </Button>
         </form>
+        <Snackbar
+          open={alert.open}
+          message={alert.message}
+          ContentProps={{ style: { backgroundColor: alert.backgroundColor } }}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          onClose={() => setAlert({ ...alert, open: false })}
+          autoHideDuration={4000}
+        />
       </Paper>
+
       <Grid className={classes.photoArea} item container></Grid>
     </Grid>
   );

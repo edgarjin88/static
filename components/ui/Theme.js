@@ -8,10 +8,7 @@ const black = "#000000";
 
 export default createMuiTheme({
   palette: {
-    common: {
-      blue: arcBlue,
-      orange: arcOrange,
-    },
+    common: {},
     primary: {
       main: arcBlue,
     },
@@ -28,14 +25,13 @@ export default createMuiTheme({
       fontSize: "1rem",
     },
     h1: {
-      // fontFamily: "Raleway",
       fontWeight: 400,
       fontSize: "2.5rem",
-      // color: arcGrey,
       lineHeight: 2,
     },
     h2: {
-      // fontFamily: "Raleway",
+      display: "flex",
+      alignItems: "center",
       fontSize: "1.4rem",
       color: arcGrey,
       lineHeight: 1.5,
@@ -72,15 +68,6 @@ export default createMuiTheme({
       fontSize: "1rem",
       fontWeight: 300,
       color: arcGrey,
-    },
-    learnButton: {
-      borderColor: arcBlue,
-      borderWidth: 2,
-      textTransform: "none",
-      color: arcBlue,
-      borderRadius: 50,
-      fontFamily: "Roboto",
-      fontWeight: "bold",
     },
   },
   overrides: {

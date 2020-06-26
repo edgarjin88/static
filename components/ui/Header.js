@@ -4,8 +4,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Slide from "@material-ui/core/Slide";
-import MenuIcon from "@material-ui/icons/Menu";
-import IconButton from "@material-ui/core/IconButton";
 
 // for tabs
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,19 +14,13 @@ import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import AppsIcon from "@material-ui/icons/Apps";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import HomeIcon from "@material-ui/icons/Home";
-import { TabScrollButton } from "@material-ui/core";
 
 /// for popover
 
 import Popover from "@material-ui/core/Popover";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 
 ///List
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import MenuList from "@material-ui/core/MenuList";
 import MenuItem from "@material-ui/core/MenuItem";
 
@@ -43,17 +35,18 @@ const menuOptions = [
     selectedIndex: 0,
   },
   {
-    name: "Sumontee.com",
-    link: "/sumontee",
-    activeIndex: 1,
-    selectedIndex: 1,
-  },
-  {
     name: "Portfolio Website",
     link: "/portfolio",
     activeIndex: 1,
     selectedIndex: 2,
   },
+  {
+    name: "Sumontee.com",
+    link: "/sumontee",
+    activeIndex: 1,
+    selectedIndex: 1,
+  },
+
   {
     name: "Launinark.com",
     link: "/launinark",
@@ -64,15 +57,11 @@ const menuOptions = [
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-    maxWidth: 500,
-    // width: "200vw",
-    // min
+    maxWidth: "100vw",
   },
   appBar: {
     backgroundColor: "white",
-    width: "100%",
-    // height: "4rem",
+    margin: 0,
     color: "black",
     display: "flex",
     alignItems: "center",
@@ -82,7 +71,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     margin: 0,
-    // height: "4rem",
   },
   tabs: {
     display: "flex",
@@ -90,12 +78,12 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     marginTop: 0,
     marginBottom: 0,
-    // fontSize: "1em",
-    // height: "4rem",
-    "&: svg": {
-      color: "black",
-      // fontSize: "1em",
-    },
+    maxWidth: "100vw",
+  },
+  tab: {
+    ...theme.typography.tab,
+    minWidth: 10,
+    marginLeft: "25px",
   },
 
   typography: {
@@ -113,10 +101,8 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1302,
   },
   menuItem: {
-    // ...theme.typography.h1,
+    ...theme.typography.tab,
     color: "black",
-    // fontSize: "2rem",
-    // fontWeight: "bold",
     backgroundColor: "white",
     borderBottom: "1px solid black",
     margin: 0,
@@ -128,16 +114,6 @@ const useStyles = makeStyles((theme) => ({
       opacity: 1,
     },
   },
-  // toolbarMargin: {
-  //   ...theme.mixins.toolbar,
-  //   marginBottom: "3em",
-  //   [theme.breakpoints.down("md")]: {
-  //     marginBottom: "2em",
-  //   },
-  //   [theme.breakpoints.down("xs")]: {
-  //     marginBottom: "1.25em",
-  //   },
-  // },
 }));
 
 function HideOnScroll(props) {
@@ -156,7 +132,7 @@ export default function HideAppBar(props) {
   const Router = useRouter();
 
   const [value, setValue] = useState(0);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -222,7 +198,6 @@ export default function HideAppBar(props) {
     handleChange(e, 1);
   };
 
-  // 아이콘 숫자 차이 때문이ㅣㄴ듯 아이콘을 더 넣어 보자.
   return (
     <>
       <CssBaseline />
@@ -237,19 +212,16 @@ export default function HideAppBar(props) {
               scrollButtons="on"
               indicatorColor="secondary"
               textColor="secondary"
-              aria-label="icon label tabs example"
+              aria-label="icon label tabs"
             >
               <Tab
-                style={{ height: "2em" }}
                 onClick={(e) => handleTabClick(e, "/")}
                 icon={<HomeIcon />}
                 label="HOME"
               />
               <Tab
                 icon={<AccountTreeIcon />}
-                // onClick={(e) => handleTabClick(e, "/projects")}
                 onClick={handleHover}
-                // onMouseLeave={handleClose}
                 label="PROJECT"
               />
               <Tab
@@ -273,7 +245,6 @@ export default function HideAppBar(props) {
         </AppBar>
       </HideOnScroll>
       <Toolbar />
-      {/* <div className={classes.toolbarMargin} /> */}
     </>
   );
 }

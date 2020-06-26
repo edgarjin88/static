@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import SimpleCard from "../components/ui/SimpleCard";
+import Head from "next/head";
+
 import Typed from "react-typed";
 const roles = [
   "React.js",
@@ -17,18 +18,6 @@ const roles = [
   "Ghost_in_the_Shell 🎞️",
 ];
 
-const backgroundImgURL = [
-  "url('/background/cross.jpg')",
-
-  "url('/background/board.jpg')",
-  ,
-  "url('/background/cuba.jpg')",
-  "url('/background/flower.jpg')",
-  "url('/background/leaf.jpg')",
-  "url('/background/wind.jpg')",
-  "url('/background/wood.jpg')",
-];
-
 const useStyles = makeStyles((theme) => ({
   main: {
     // backgroundColor: "red",
@@ -38,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   backImg: {
-    backgroundImage: "url('/background/board.jpg')",
+    backgroundImage: "url('/background/hand.jpg')",
     backgroundSize: "cover",
     background: "no-repeat",
     width: "50%",
@@ -52,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
   description: {
     width: "50%",
     // height: "",
-    color: "grey",
+
+    color: "black",
     backgroundColor: "white",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
@@ -66,38 +56,43 @@ const useStyles = makeStyles((theme) => ({
   firstText: {
     marginTop: "3em",
     backgroundColor: "black",
-    fontWeight: 200,
+    fontWeight: 500,
     color: "black",
     fontSize: "4rem",
     transition: "all 2s",
-    "&:hover": {
-      color: "red",
-    },
+
     marginBottom: 0,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "3rem",
+    },
   },
   secondText: {
     marginTop: "3em",
-    fontWeight: 200,
+    fontWeight: 500,
     backgroundColor: "black",
     color: "white",
     fontSize: "4rem",
     transition: "all 2s",
-    "&:hover": {
-      color: "grey",
-    },
+
     marginBottom: 0,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "3rem",
+    },
   },
   jobTitle: {
     fontSize: "1.8rem",
     transition: "all 0.2s",
     color: "black",
+
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.4rem",
+    },
   },
 }));
 
 const Index = () => {
   const classes = useStyles();
   const [descriptionStyle, setDescriptionStyle] = useState(classes.firstText);
-  const [title, setTitle] = useState(classes.jobTitle);
   const [transition, setTransition] = useState(false);
   useEffect(() => {
     console.log("fired");
@@ -117,9 +112,35 @@ const Index = () => {
 
   return (
     <div className={`${classes.main}`}>
-      {/* <h1>PLAY</h1> */}
+      <Head>
+        <title key="title">Yongduckjin.com</title>
+        <meta
+          name="description"
+          key={"description"}
+          content={`Full stack web developer | Next.js/React.js/Node.js/Express.js/WebRTC  `}
+        />
+        <meta
+          property="og:title"
+          content={`Full Web Developer with passion and skills | Yongduck Jin`}
+        />
+
+        <meta
+          key={"og:description"}
+          property="og:description"
+          content={`Full stack web developer | Next.js/React.js/Node.js/Express.js/WebRTC `}
+        />
+        <meta key={"og:url"} property="og:url" content={`yongduckjin.com`} />
+        <link key={"canonical"} rel="canonical" href={`yongduckjin.com`} />
+      </Head>
       <div className={classes.backImg}></div>
-      <div className={`${classes.description} pattern-dots-md`}>
+      <div
+        className={`${classes.description}  pattern-dots-sm
+
+
+
+
+`}
+      >
         <h1
           className={`pattern-horizontal-lines-sm
 	 text-pattern ${descriptionStyle}`}
@@ -140,7 +161,6 @@ const Index = () => {
             cursorChar="|"
           />
         </h2>
-        {/* <SimpleCard /> */}
       </div>
     </div>
   );

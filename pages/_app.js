@@ -28,7 +28,15 @@ const App = ({ Component, pageProps }) => {
   return (
     <React.Fragment>
       <Head>
-        <title>My page</title>
+        <title key="title">Yongduckjin.com</title>
+        <meta
+          key="viewport"
+          name="viewport"
+          content="initial-scale=1.0, width=device-width"
+        />
+        <meta key="http" http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+
         <link href="https://unpkg.com/pattern.css" rel="stylesheet" />
       </Head>
       <ThemeProvider theme={Theme}>
@@ -43,9 +51,7 @@ const App = ({ Component, pageProps }) => {
           setSelectedIndex={setSelectedIndex}
           setValue={setValue}
         />
-        {/* <LazyLoadComponent threshold={400}>
-        </LazyLoadComponent> */}
-        <Footer setSelectedIndex={setSelectedIndex} setValue={setValue} />
+        <Footer />
       </ThemeProvider>
     </React.Fragment>
   );

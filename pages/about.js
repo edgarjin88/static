@@ -1,8 +1,8 @@
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+import Head from "next/head";
 
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import MusicCard from "../components/ui/MusicCard";
 import Laser from "../components/ui/Laser";
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -15,14 +15,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
 
     margin: "auto",
+    marginTop: "0.8rem",
     alignItems: "center",
-    marginTop: "10px",
     textAlign: "center",
   },
   gridContainer: {
     display: "flex",
-    height: "20rem", // 좀더 높이고
-    // backgroundColor: "red",
+    height: "20rem",
     justifyContent: "center",
     marginTop: "0",
     marginBottom: "0",
@@ -32,11 +31,11 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down("sm")]: {
       width: "100%",
-      height: "22rem",
     },
     [theme.breakpoints.down("xs")]: {
       // width: "100%",
-      height: "18rem",
+      height: "22rem",
+
       marginBottom: "1rem",
     },
   },
@@ -72,8 +71,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     // padding: "1rem",
     [theme.breakpoints.down("xs")]: {
-      paddingTop: "1rem",
+      // paddingTop: "1rem",
+      padding: "1rem",
+      paddingBottom: "2rem",
       width: "98%",
+      // height: "25rem",
       marginTop: "1rem",
       marginBottom: "2rem",
     },
@@ -89,22 +91,41 @@ const useStyles = makeStyles((theme) => ({
 const About = () => {
   const classes = useStyles();
 
-  // hover 했을 때만 한들리게 하자. -하나. 딱 이거 하나만 하자.
-  // 헤딩만 흔들리게.
-  // About은 옆에서 들어오는 애니메이션.
-  // 프로그래밍은 흔들리는 거.
-  // 져니는 건드리면 그곳 자체가 커지게 하기.
-  // Likes는 fade in 하게
-
-  // 반반 블랙엔 화이트로 4 컬럼 정도 밀어 넣고,
-  //   위성, 효과 추가.애니메이션 호버 이팩트 추가
   return (
     <div className={classes.main}>
+      <Head>
+        <title key="title">About | Yongduck Jin</title>
+        <meta
+          name="description"
+          key={"description"}
+          content={`Welcome to my website : ) `}
+        />
+        <meta
+          property="og:title"
+          content={`Full Web Developer with passion and skills | Yongduck Jin`}
+        />
+
+        <meta
+          key={"og:description"}
+          property="og:description"
+          content={`Full Web Developer with passion and skills | Yongduck Jin`}
+        />
+        <meta
+          key={"og:url"}
+          property="og:url"
+          content={`yongduckjin.com/about`}
+        />
+        <link
+          key={"canonical"}
+          rel="canonical"
+          href={`yongduckjin.com/about`}
+        />
+      </Head>
       <Grid container className={classes.gridContainer}>
         <Grid item className={classes.imageContainer}>
           <img
             className={classes.image}
-            src="../about/aboutme.jpg"
+            src="../about/sky.jpg"
             alt="About me"
           />
         </Grid>

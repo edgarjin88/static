@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
   mainContainer: {
     position: "absolute",
-    // height: "20vh",
+    backgroundColor: (props) => props.backgroundColor,
   },
   project: {
     display: "flex",
@@ -92,10 +92,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Footer(props) {
+export default function Footer() {
   const Router = useRouter();
 
-  const classes = useStyles();
+  const white =
+    Router.pathname === "/lemonstreaming" ||
+    Router.pathname === "/portfolio" ||
+    Router.pathname === "/sumontee" ||
+    Router.pathname === "/launinark";
+
+  const props = white ? { backgroundColor: "white" } : { backgroundColor: "" };
+  const classes = useStyles(props);
 
   const handleLinkClick = (arg) => {
     Router.push(arg).then(() => window.scrollTo(0, 0));
@@ -140,13 +147,6 @@ export default function Footer(props) {
                 >
                   - Lemonstreaming
                 </Grid>
-                <Grid
-                  item
-                  className={classes.link}
-                  onClick={(e) => handleLinkClick("/sumontee")}
-                >
-                  - Sumontee
-                </Grid>
 
                 <Grid
                   item
@@ -154,6 +154,13 @@ export default function Footer(props) {
                   className={classes.link}
                 >
                   - Portfolio Website
+                </Grid>
+                <Grid
+                  item
+                  className={classes.link}
+                  onClick={(e) => handleLinkClick("/sumontee")}
+                >
+                  - Sumontee
                 </Grid>
                 <Grid
                   item
